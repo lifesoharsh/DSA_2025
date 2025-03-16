@@ -1,0 +1,15 @@
+int getSecondLargest(vector<int> &arr) {
+        int l=INT_MIN, sl=arr[0];
+        for(int i=0;i<arr.size();i++){
+            if(arr[i]>l){
+                sl=l;
+                l=arr[i];
+            }
+            else if(arr[i]>sl && arr[i]<l){
+                sl=arr[i];
+            }
+            else continue;
+        }
+        if (sl==INT_MIN) return -1 ;
+        else return sl;
+    }
