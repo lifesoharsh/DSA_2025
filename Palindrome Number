@@ -1,0 +1,19 @@
+bool isPalindrome(int x) {
+        long long int rev=0;
+        long long int num=x;
+        int ctr=0;
+        long long int check=x;
+        while(x>0){
+            x/=10;
+            ctr++;
+        }
+        long long int power=pow(10,ctr-1);
+        while(num>0){
+            int rem=num%10;
+            rev+=rem*power;
+            power/=10;
+            num/=10;
+        }
+        if(check==rev) return true;
+        return false;
+    }
