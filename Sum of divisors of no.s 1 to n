@@ -1,0 +1,14 @@
+int sumOfDivisors(int n) {
+        int sum[n+1]={};
+        int k=1;
+        for(int i=1;i<=n;i++){
+            for(int j=1;j<=i;j++){
+                if(i%j==0) sum[k]+=j;
+            }k++;
+        }
+        int ans=0;
+        for(int i=1;i<=n;i++){
+            ans+=sum[i];
+        }
+        return ans;
+    }
