@@ -1,0 +1,10 @@
+void reverse(vector<int> &arr,int i){
+        if(i>=(arr.size()/2)) return;
+        else{
+            swap(arr[i],arr[arr.size()-i-1]);
+            return reverse(arr,i+1);
+        }
+    }
+    void reverseArray(vector<int> &arr) {
+        reverse(arr,0);
+    }
