@@ -1,0 +1,29 @@
+//Remove all duplicates from a linked list [retain only unique elements]
+
+
+class Solution {
+public:
+    ListNode* deleteDuplicates(ListNode* head) {
+        ListNode* current = head;
+        ListNode* dummy  = new ListNode(0,head);
+        ListNode* prev = dummy;
+        map<int,int> freq;
+        while(current){
+            freq[current->val]++;
+            current = current->next;
+        }
+        current = head;
+        while(current){
+            if(freq[current->val] > 1){
+                prev->next = current->next;
+                delete current;
+                current = prev->next;
+            }
+            else {
+                prev = current;
+                current = current->next;
+            }
+        }
+        return dummy->next;
+    }
+};
