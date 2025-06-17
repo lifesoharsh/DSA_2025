@@ -1,0 +1,37 @@
+// Reversing LL starting from index 'left' till index 'right'
+
+class Solution {
+public:
+    ListNode* reverseBetween(ListNode* head, int left, int right) {
+        if(!head || !head->next) return head;
+        
+        ListNode* dummy = new ListNode(0,head);
+        stack<ListNode*> st;
+        ListNode* prev;
+        ListNode* leftt = dummy;
+        ListNode* rightt = dummy;
+
+        for(int i = 0; i < left; i++){
+            prev = leftt;
+            leftt = leftt->next;
+        }
+
+        for(int i = 0; i < right; i++) rightt = rightt->next;
+
+        while(leftt != rightt){
+            st.push(leftt);
+            leftt = leftt->next;
+        }
+
+        st.push(rightt);
+        prev->next = rightt->next;
+
+        while(!st.empty()){
+            st.top()->next = prev->next;
+            prev->next = st.top();
+            st.pop();
+            prev = prev->next;
+        }
+        return dummy->next;
+    }
+};
