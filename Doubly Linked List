@@ -1,0 +1,130 @@
+#include <iostream>
+using namespace std;
+
+struct node{
+    int val;
+    node* next;
+    node* prev;
+    
+    node(int v){
+        val = v;
+        prev = nullptr;
+        next = nullptr;
+    }
+    node(int v, node* n, node* p){
+        val =v;
+        next = n;
+        prev = p;
+    }
+};
+
+class list{
+    public:
+    
+    node* head;
+    int size;
+    list(){
+        head = nullptr;
+        size = 0;
+    }
+    
+void insertAtHead(int v){
+    node* n = new node(v, head, nullptr);
+    if(head) head->prev = n;
+    head = n;
+    size++;
+}
+
+void insertAtEnd(int v){
+    if(!head) return insertAtHead(v);
+    node* current = head;
+    while(current->next) current = current->next;
+    current->next = new node(v, nullptr, current);
+    size++;
+}
+
+void insert(int v,int index){
+    if(index < 0 || index >= size) return;
+    if(index == 0) return insertAtHead(v);
+    
+    node* dummy = new node(0,head,nullptr);
+    node* current = dummy;
+    
+    for(int i = 0;i < index; i++) current = current->next;
+    
+    node* nextt = current->next;
+    node* n = new node(v,nextt,current);
+    current->next = n;
+    if(nextt) nextt->prev = n;
+    
+    delete dummy;
+    size++;
+}
+
+void print(){
+    if(!head) return;
+    
+    node* current = head;
+    node* tail;
+    
+    while(current){
+        tail = current;
+        cout<<current->val<<" ";
+        current = current->next;
+    }
+    cout<<endl;
+    
+    while(tail){
+       cout<<tail->val<<" ";
+       tail = tail->prev;
+    }
+    cout<<endl;
+}
+
+void deletee(int v){
+    node* dummy = new node(0, head, nullptr);
+    node* current = dummy;
+    
+    while(current->next){
+        if(current->next->val==v){
+            node* temp = current->next;
+            if(temp->next) temp->next->prev = current;
+            current->next = temp->next;
+            delete temp;
+            size--;
+        }
+        else current = current->next;
+    }
+    
+    head = dummy->next;
+    if(head) head->prev = nullptr;
+    delete dummy;
+    }
+};
+
+int main(){
+    list l1;
+    
+    l1.insertAtHead(3);
+    l1.insertAtHead(2);
+    l1.insertAtHead(1);
+    
+    l1.insertAtEnd(4);
+    l1.insertAtEnd(5);
+    l1.insertAtEnd(6);
+    
+    l1.insert(8,2);
+    l1.insert(8,2);
+    l1.insert(8,9);
+    l1.insert(8,5);
+    l1.insert(0,0);
+    
+    l1.print();
+    
+    l1.deletee(0);
+    l1.deletee(8);
+    
+    l1.print();
+    
+    return 0;
+}
