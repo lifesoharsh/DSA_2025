@@ -1,0 +1,21 @@
+class Solution {
+public:
+    bool bs(int s, int e, int n, vector<int>& nums){
+            if(s<=e){
+                int mid=(e-s)/2 +s;
+                if(nums[mid]==n) return true;
+                else if(nums[mid]<n) return bs(mid+1,e,n,nums);
+                else return bs(s,mid-1,n,nums);
+            }
+            return false;
+        }
+
+    vector<int> findDisappearedNumbers(vector<int>& nums) {
+        vector<int> missing;
+        sort(nums.begin(),nums.end());
+        for(int i=1;i<=nums.size();i++){
+            if(!bs(0,nums.size()-1,i,nums)) missing.push_back(i);
+        }
+        return missing;
+    }
+};
