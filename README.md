@@ -1,8 +1,9 @@
 ```markdown
 DSA_2025
 
-This repository contains my Data Structures and Algorithms (DSA) practice and solutions for the year 2025. It includes problems
-from various topics such as arrays, linked lists, stacks, queues, trees, graphs, and more.
+This repository contains my Data Structures and Algorithms (DSA) practice and solutions
+for the year 2025. It includes problems from various topics like arrays, linked lists,
+stacks, queues, trees, graphs, and more.
 
 ✍️ About
 
