@@ -1,0 +1,26 @@
+class Solution {
+public:
+    ListNode* partition(ListNode* head, int x) {
+        if(!head || !head->next) return head;
+
+        ListNode* dummy1 = new ListNode(0, head);
+        ListNode* dummy2 = new ListNode(0, head);
+        ListNode* lhead = dummy1;
+        ListNode* ghead = dummy2;
+
+        while(head){
+            if(head-> val < x){
+                lhead->next = head;
+                lhead = lhead->next;
+            }
+            else{
+                ghead->next = head;
+                ghead = ghead->next;
+            }
+            head = head->next;
+        }
+        ghead->next = nullptr;
+        lhead->next = dummy2->next;
+        return dummy1->next;
+    }
+};
