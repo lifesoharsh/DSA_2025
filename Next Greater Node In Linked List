@@ -1,0 +1,22 @@
+class Solution {
+public:
+    vector<int> nextLargerNodes(ListNode* head) {
+        vector<int> nums;
+        ListNode* current = head;
+        stack<int> s;
+
+        while(current){
+            nums.push_back(current->val);
+            current = current->next;
+        }
+        vector<int> result(nums.size());
+        for(int i = 0; i < nums.size(); i++){
+            while(!s.empty() && nums[i] > nums[s.top()]){
+                result[s.top()] = nums[i];
+                s.pop();
+            }
+            s.push(i);
+        }
+        return result;
+        }
+};
