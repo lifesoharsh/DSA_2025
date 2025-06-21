@@ -1,0 +1,25 @@
+lass Solution {
+public:
+    ListNode* reverseKGroup(ListNode* head, int k) {
+        int count = 0;
+        ListNode* current = head;
+        while(count < k){
+            if(!current) return head;
+            count++;
+            current = current->next;
+        }
+        ListNode* prev = reverseKGroup(current, k);
+
+        current = head;
+        count = 0;
+
+        while(count < k){
+            ListNode* nextt = current->next;
+            current->next = prev;
+            count++;
+            prev = current;
+            current = nextt;
+        }
+        return prev;        
+    }
+};
