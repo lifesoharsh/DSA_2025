@@ -1,0 +1,54 @@
+#include <iostream>
+using namespace std;
+
+class Stack{
+    int arr[100];
+    int k = 0;
+    public:
+    void push(int val){
+        if(k == 100){
+            cout<<"Stack overflow" << endl;
+            return;
+        }
+        arr[k] = val;
+        k++;
+    }
+    void pop(){
+        if(k == 0){
+            cout<<"Stack underflow" << endl;
+            return;
+        }
+        k--;
+    }
+    int top(){
+        if(k == 0){
+            cout<<"Stack underflow" << endl;
+            return -1;
+        }
+        return arr[k-1];
+    }
+    bool empty(){
+        return (k == 0);
+    }
+};
+
+int main(){
+    Stack s;
+    s.push(1); 
+    s.push(2);
+    s.push(3);
+    s.push(4);
+    s.push(5);
+    while(!s.empty()){
+        cout<<s.top()<<" ";
+        s.pop();
+    }
+    cout<< endl;
+    s.pop();    //underflow
+    s.top();    //underflow
+    for(int i = 0; i < 100; i++){
+        s.push(i);
+     }
+    s.push(25);    //overflow
+    return 0;
+}
