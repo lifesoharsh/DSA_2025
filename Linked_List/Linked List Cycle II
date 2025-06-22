@@ -1,3 +1,5 @@
+//starting node of a cycle
+
 class Solution {
 public:
     ListNode *detectCycle(ListNode *head) {
