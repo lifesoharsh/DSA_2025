@@ -1,0 +1,79 @@
+#include <iostream>
+using namespace std;
+
+struct Node{
+    int val;
+    Node* next;
+    Node(int v){
+        val = v;
+        next = nullptr;
+    }
+};
+
+class list{
+    Node* head;
+    Node* tail;
+    
+    public:
+    list(){
+        head = nullptr;
+        tail = nullptr;
+    }
+    ~list(){
+        delete head;
+        delete tail;
+    }
+    void push(int v){
+        if(!head){
+            head = new Node(v);
+            tail = head;
+            return;
+        }
+        tail->next = new Node(v);
+        tail = tail->next;
+    }
+    
+    void pop(){
+        if(!head) {
+            cout<< "Stack underflow" <<endl;
+            return;
+        }
+        if(head == tail){
+            head = tail = nullptr;
+            return;
+        }
+        Node* temp = head;
+        while(temp->next!=tail){
+            temp = temp->next;
+        }
+        temp->next = nullptr;
+        tail = temp;
+    }
+    int top(){
+        if(!head) {
+            cout<< "Stack underflow" <<endl;
+            return -1;
+        }
+        return tail->val;
+    }
+    bool empty(){
+        return (head == nullptr);
+    }
+};
+
+int main(){
+    list st;
+    st.push(1);
+    st.push(2);
+    st.push(3);
+    st.push(4);
+    st.push(5);
+    while(!st.empty()){
+        cout<<st.top()<<" ";
+        st.pop();
+    }
+    cout<<endl;
+    st.pop();   //underflow
+    st.top();   //underflow
+    return 0;
+}
