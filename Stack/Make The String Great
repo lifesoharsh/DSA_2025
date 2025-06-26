@@ -1,0 +1,22 @@
+class Solution {
+public:
+    string makeGood(string s) {
+        string anew = "";
+        stack<char> st;
+        for(int i = 0; i < s.length(); i++){
+            if(!st.empty()){
+                if(abs(s[i] - st.top()) == 32){
+                    st.pop();
+                }
+                else st.push(s[i]);
+            }
+           else st.push(s[i]);
+        }
+        while(!st.empty()){
+            anew += st.top();
+            st.pop();
+        }
+        reverse(anew.begin(), anew.end());
+        return anew;
+    }
+};
