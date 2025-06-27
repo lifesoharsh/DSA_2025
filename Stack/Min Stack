@@ -24,4 +24,4 @@ public:
     int getMin() {
         return minst.top();
     }
-};s
+};
