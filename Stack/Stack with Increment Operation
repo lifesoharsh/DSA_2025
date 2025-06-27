@@ -1,0 +1,40 @@
+class CustomStack {
+public:
+    stack<int> st;
+    stack<int> backup;
+    int size = 0;
+
+    CustomStack(int maxSize) {
+        size = maxSize;
+    }
+
+    void push(int x) {
+        if(st.size() == size) return;
+        st.push(x);
+    }
+    
+    int pop() {
+        if(st.empty()) return -1;
+        int popped = st.top();
+        st.pop();
+        return popped;
+    }
+    
+    void increment(int k, int val) {
+            int i = 0, n = st.size();
+            while(!st.empty()){
+                if(i < (n-k)){
+                    backup.push(st.top());
+                    i++;
+                }
+                else{
+                    backup.push(st.top() += val);
+                }
+                 st.pop();
+            }
+        while(!backup.empty()){
+            st.push(backup.top());
+            backup.pop();
+        }
+    }
+};
