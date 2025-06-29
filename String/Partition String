@@ -1,0 +1,23 @@
+class Solution {
+public:
+    vector<string> partitionString(string s) {
+        unordered_set<string> seen;
+        vector<string> result;
+        string segment;
+        for(int i = 0; i < s.length(); i++){
+            segment = "";
+            int j = i;
+            while(j < s.length()){
+                segment += s[j];
+                if(seen.count(segment) == 0){
+                    seen.insert(segment);
+                    result.push_back(segment);
+                    break;
+                }
+                j += 1;
+                i = j;
+            }
+        }
+        return result;
+    }
+};
