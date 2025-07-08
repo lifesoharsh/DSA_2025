@@ -1,0 +1,26 @@
+class Solution {
+public:
+    bool containsNearbyDuplicate(vector<int>& nums, int k) {
+        int i = 0, j = 0;
+        unordered_set<int> seen;
+
+        while(j < nums.size()){
+            if(!seen.count(nums[j])){
+                seen.insert(nums[j]);
+                if(abs(i - j) > k){
+                    seen.erase(nums[i]);
+                    i++;
+                }
+                j++;
+            }
+            else{
+                if(nums[j] == nums[i]){
+                    if(abs(i - j) <= k) return true;
+                    j++;
+                }
+                i++;
+            }
+        }
+        return false;
+    }
+};
