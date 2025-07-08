@@ -1,0 +1,12 @@
+class Solution {
+public:
+    bool isAnagram(string s, string t) {
+        if(t.length() != s.length()) return false;
+        unordered_map<char, int> letters;
+        for(char c:s) letters[c]++;
+        for(char c:t){
+            if(--letters[c] < 0) return false;
+        }
+        return true;
+    }
+};
