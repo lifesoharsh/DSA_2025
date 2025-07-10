@@ -1,0 +1,35 @@
+class Solution {
+public:
+    vector<int> spiralOrder(vector<vector<int>>& matrix) {
+        vector<int> spiral;
+        int srow = 0, scol = 0, erow = matrix.size()-1;
+        int ecol = matrix[0].size()-1;
+
+        while(srow <= erow && scol <= ecol){
+
+            for(int i = scol; i <= ecol; i++){
+                spiral.push_back(matrix[srow][i]);
+            }
+            srow++;
+            if(srow > erow) break;
+
+             for(int i = srow; i <= erow; i++){
+                spiral.push_back(matrix[i][ecol]);
+            }
+            ecol--;
+            if(scol > ecol) break;
+
+             for(int i = ecol; i >= scol; i--){
+                spiral.push_back(matrix[erow][i]);
+            }
+            erow--;
+            
+             for(int i = erow; i >= srow; i--){
+                spiral.push_back(matrix[i][scol]);
+            }
+            scol++;
+        }
+
+        return spiral;
+    }
+};
