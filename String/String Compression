@@ -1,0 +1,26 @@
+class Solution {
+public:
+    int compress(vector<char>& chars) {
+        if (chars.size() == 1) return 1;
+        
+        int i = 0, j = 1;
+        while (j <= chars.size()) {
+            if (j < chars.size() && chars[j] == chars[i]) {
+                j++;
+            } else {
+                int freq = j - i;
+                if (freq > 1) {
+                    string f = to_string(freq);
+                    chars.erase(chars.begin() + i + 1, chars.begin() + j);
+                    chars.insert(chars.begin() + i + 1, f.begin(), f.end());
+                    i = i + 1 + f.size();  
+                } else {
+                    i = j;
+                }
+                j = i + 1;
+            }
+        }
+        
+        return chars.size();
+    }
+};
