@@ -1,0 +1,94 @@
+#include <iostream>
+using namespace std;
+
+struct ListNode{
+    int data;
+    ListNode* next;
+    ListNode(int val){
+        data = val;
+        next = nullptr;
+    }
+};
+
+class List{
+    ListNode* head;
+    ListNode* tail;
+    public:
+    List(int val){
+        head = new ListNode(val);
+        tail = head;
+        tail->next = head;
+    }
+    void insertAtHead(int val){
+        if(!head){
+            head = new ListNode(val);
+            tail = head;
+        }
+        else{
+            ListNode* n = new ListNode(val);
+            n->next = head;
+            head = n;
+        }
+        tail->next = head;
+    }
+    void insertAtTail(int val){
+        if(!head){
+            insertAtHead(val);
+            return;
+        }
+        ListNode* n = new ListNode(val);
+        n->next = head;
+        tail->next = n;
+        tail = n;
+    }
+    void deleteAtHead(){
+        if(!head) return;
+        if(head == tail){
+            delete head;
+            head = tail = nullptr;
+            return;
+        }
+        ListNode* temp = head;
+        tail->next = temp->next;
+        head = tail->next;
+        delete temp;
+    }
+    void deleteAtTail(){
+        if(!head) return;
+        if(head == tail){
+            delete head;
+            head = tail = nullptr;
+            return;
+        }
+        ListNode* temp = head;
+        while(temp->next != tail) temp = temp->next;
+        ListNode* store = temp->next;
+        temp->next = tail->next;
+        tail = temp;
+        temp = store;
+        delete temp;
+    }
+    void print(){
+        if(!head) return;
+        ListNode* temp = head;
+        while(temp != tail){
+            cout<<temp->data<<"->";
+            temp = temp->next;
+        } cout<<temp->data<<endl;
+    }
+    
+};
+
+int main(){
+    List l1 (3);
+    l1.insertAtHead(2);
+    l1.insertAtHead(0);
+    l1.insertAtTail(4);
+    l1.insertAtTail(5);
+    l1.print();
+    l1.deleteAtHead();
+    l1.insertAtHead(1);
+    l1.deleteAtTail();
+    l1.print();
+    return 0;
+}
