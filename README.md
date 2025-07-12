@@ -17,13 +17,16 @@ stacks, queues, trees, graphs, and more.
 
 🧠 Topics Covered
 
-* ✅ Arrays & Strings
-* ✅ Linked Lists (Singly, Doubly)
-* ✅ Stack & Queue
+* ✅ Math/Bit Manipulation
+* ✅ Arrays
+* ✅ Strings
+* ✅ Linked Lists (Singly, Doubly, Circular)
+* ✅ Stack
+* ✅ Queue
 * ✅ Trees (Binary Tree, BST)
-* ✅ Graphs (BFS, DFS, Topo Sort)
+* ✅ Graphs
 * ✅ Dynamic Programming
-* ✅ Backtracking & Recursion
+* ✅ Recursion &  Backtracking 
 * ✅ Searching & Sorting Techniques
 * ✅ Greedy Approaches
 
