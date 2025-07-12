@@ -1,0 +1,71 @@
+class Solution {
+public:
+    bool isReachable(vector<vector<int>>& grid, int val, int r, int c, int& nr, int& nc){
+        int n = grid.size();
+        if(r+2 < n){
+            if(c-1 >= 0 && grid[r+2][c-1] == val){
+                nr = r+2;
+                nc = c-1;
+                return true;
+            }
+            if(c+1 < n && grid[r+2][c+1] == val){
+                nr = r+2;
+                nc = c+1;
+                return true;
+            }   
+        }
+        if(r-2 >= 0){
+            if(c-1 >= 0 && grid[r-2][c-1] == val){
+                nr = r-2;
+                nc = c-1;
+                return true;
+            }
+            if(c+1 < n && grid[r-2][c+1] == val){
+                nr = r-2;
+                nc = c+1;
+                return true;
+            }    
+        }
+        if(c-2 >= 0){
+            if(r-1 >= 0 && grid[r-1][c-2] == val){
+                nr = r-1;
+                nc = c-2;
+                return true;
+            }
+            if(r+1 < n && grid[r+1][c-2] == val){
+                nr = r+1;
+                nc = c-2;
+                return true;
+            }    
+        }
+        if(c+2 < n){
+            if(r-1 >= 0 && grid[r-1][c+2] == val){
+                nr = r-1;
+                nc = c+2;
+                return true;
+            }
+            if(r+1 < n && grid[r+1][c+2] == val){
+                nr = r+1;
+                nc = c+2;
+                return true;
+            }    
+        }
+        return false;
+    }
+
+    bool validity(vector<vector<int>>& grid, int val, int r, int c){
+        int n = grid.size();
+        int nr, nc;
+        if(val == n*n) return true;
+
+        if(isReachable(grid,val,r,c,nr,nc)){
+            return validity(grid, val+1, nr, nc);
+        }
+        return false;
+    }
+
+    bool checkValidGrid(vector<vector<int>>& grid) {
+        if(grid[0][0] != 0) return false;
+        return validity(grid, 1, 0, 0);
+    }
+};
