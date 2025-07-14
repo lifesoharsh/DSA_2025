@@ -1,0 +1,17 @@
+class Solution {
+public:
+    int countNodes(TreeNode* root) {
+        if(!root) return 0;
+        int count = 0;
+        queue<TreeNode*> q;
+        q.push(root);
+        while(!q.empty()){
+            TreeNode* current = q.front();
+            q.pop();
+            count++;
+            if(current->left) q.push(current->left);
+            if(current->right) q.push(current->right);
+        }
+        return count;
+    }
+};
