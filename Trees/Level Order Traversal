@@ -1,0 +1,21 @@
+void levelOrder(Node* root){
+    if(!root) return;
+    queue<Node*> q;
+    q.push(root);
+    q.push(NULL);
+    while(!q.empty()){
+        Node* current = q.front();
+        q.pop();
+        if(current == NULL){
+            if(q.empty()) break;
+            else{
+                cout<<endl;
+                q.push(NULL);
+                continue;
+            }
+        }
+        cout<<current->data<<" ";
+        if(current->left) q.push(current->left);
+        if(current->right) q.push(current->right);
+    }
+}
