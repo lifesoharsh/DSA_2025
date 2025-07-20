@@ -1,0 +1,16 @@
+class Solution {
+public:
+    char kthCharacter(int k) {
+        string word = "a";
+        string append = "";
+        while(word.length() < k){
+            for(int i = 0; i < word.length(); i++){
+                char c = word[i] == 'z' ? 'a' : word[i]+1;
+                append.push_back(c);
+            }
+            word += append;
+            append = "";
+        }
+        return word[k-1];
+    }
+};
