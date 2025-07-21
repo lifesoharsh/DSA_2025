@@ -1,0 +1,15 @@
+class Solution {
+public:
+    bool check(TreeNode* p, TreeNode* q){
+        if(!p && q || p && !q) return false;
+        if(!p && !q) return true;
+        bool leftSame = check(p->left, q->left);
+        bool rightSame = check(p->right, q->right);
+        return (leftSame && rightSame && p->val == q->val);
+    }
+    bool isSubtree(TreeNode* root, TreeNode* subRoot) {
+        if(!root) return false;
+        if(check(root, subRoot)) return true;
+        return (isSubtree(root->left, subRoot) || isSubtree(root->right, subRoot));
+    }
+};
