@@ -1,0 +1,29 @@
+class Solution {
+public:
+    int sumOfLeftLeaves(TreeNode* root) {
+        if(!root) return 0;
+
+        int sum = 0;
+        queue<TreeNode*> q;
+
+        q.push(root);
+
+        while(!q.empty()){
+            TreeNode* curr = q.front();
+            q.pop();
+
+            if(curr && !curr->left && !curr->right){
+                if(!q.empty() && q.front() == nullptr){
+                    sum += curr->val;
+                    q.pop();
+                }
+            }
+            if(curr && curr->left){
+                q.push(curr->left);
+                q.push(NULL);
+            }
+            if(curr && curr->right) q.push(curr->right);
+        }
+        return sum;
+    }
+};
