@@ -1,0 +1,17 @@
+class Solution {
+public:
+    int maxDiameter = 0;
+
+    int depth(TreeNode* root) {
+        if (!root) return 0;
+        int l = depth(root->left);
+        int r = depth(root->right);
+        maxDiameter = max(maxDiameter, l + r);
+        return max(l, r) + 1;
+    }
+
+    int diameterOfBinaryTree(TreeNode* root) {
+        depth(root);
+        return maxDiameter;
+    }
+};
