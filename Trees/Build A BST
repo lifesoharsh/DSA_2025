@@ -1,0 +1,63 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+class TreeNode{
+public:
+    int val;
+    TreeNode* left;
+    TreeNode* right;
+    
+    TreeNode(int val){
+        this->val = val;
+        left = right = nullptr;
+    }
+};
+
+class BST{
+public:
+    TreeNode* root;
+    BST(){
+        root = nullptr;
+    }
+    
+    TreeNode* insert(TreeNode* root, int num){
+        if(!root) return new TreeNode(num);
+        
+        if(num < root->val){
+            root->left = insert(root->left,num);
+        }
+        else{
+            root->right = insert(root->right,num);
+        }
+        
+        return root;
+    }
+    
+    TreeNode* buildBST(vector<int> arr){
+        TreeNode* root = nullptr;
+        
+        for(int num:arr){
+            root = insert(root,num);
+        }
+        
+        return root;
+    }
+    
+    void inorder(TreeNode* root){
+        if(!root) return;
+        
+        inorder(root->left);
+        cout << root->val << " ";
+        inorder(root->right);
+    }
+};
+
+int main(){
+    vector<int> arr = {3,2,1,5,6,4};
+    BST t;
+    t.root = t.buildBST(arr);
+    t.inorder(t.root);
+    
+    return 0;
+}
