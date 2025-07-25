@@ -1,0 +1,17 @@
+class Solution {
+public:
+    bool validateBST(TreeNode* root, long long minm, long long maxm){
+        if(!root) return true;
+
+        if(root->val >= maxm || root->val <= minm) return false;
+
+        bool l = validateBST(root->left,minm,root->val);
+        bool r = validateBST(root->right,root->val,maxm);
+        
+        return (l && r);
+    }
+
+    bool isValidBST(TreeNode* root) {
+        return validateBST(root,(long long)INT_MIN-1,(long long)INT_MAX+1);
+    }
+};
