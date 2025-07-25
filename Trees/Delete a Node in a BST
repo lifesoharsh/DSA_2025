@@ -1,0 +1,32 @@
+class Solution {
+public:
+
+    TreeNode* getInorderSuccessor(TreeNode* root){
+        while(root && root->left) root = root->left;
+        return root;
+    }
+
+    TreeNode* deleteNode(TreeNode* root, int key) {
+        if(!root) return root;
+
+        if(key < root->val){
+           root->left = deleteNode(root->left,key);
+        }
+        else if(key > root->val){
+            root->right = deleteNode(root->right,key);
+        }
+        else{
+            if(!root->left && !root->right) root = nullptr;
+
+            else if(!root->left) root = root->right;
+            else if(!root->right) root = root->left;
+
+            else{
+                TreeNode* IS = getInorderSuccessor(root->right);
+                root->val = IS->val;
+                root->right = deleteNode(root->right,IS->val);
+            }
+        }
+        return root;
+    }
+};
