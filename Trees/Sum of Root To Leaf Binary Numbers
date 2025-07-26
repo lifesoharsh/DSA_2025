@@ -1,0 +1,25 @@
+class Solution {
+public:
+    void binarySum(TreeNode* root, int& num, int& sum){
+        if(!root) return;
+
+        num = num << 1;
+        num += (root->val & 1);
+
+        if(!root->left && !root->right){
+            sum += num;
+            num = num >> 1;
+            return;
+        }
+        binarySum(root->left,num,sum);
+        binarySum(root->right,num,sum);
+
+        num = num >> 1;
+    }
+    
+    int sumRootToLeaf(TreeNode* root) {
+        int sum = 0, num = 0;
+        binarySum(root,num,sum);
+        return sum;
+    }
+};
