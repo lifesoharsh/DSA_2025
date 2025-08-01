@@ -1,0 +1,35 @@
+class Solution {
+public:
+    void pascal(vector<int>& level, int idx, vector<vector<int>>& ans, int numRows, vector<int>& prev){
+        if(idx == numRows) return;
+
+        if(idx == 0){
+            level.push_back(1);
+            level.push_back(1);
+        }
+        else{
+            level.push_back(1);
+            for(int i = 0; i < prev.size()-1; i++){
+                level.push_back(prev[i] + prev[i+1]);
+            }
+            level.push_back(1);
+        }
+
+        prev.clear();
+        prev.insert(prev.end(),level.begin(),level.end());
+        ans.push_back(level);
+        level.clear();
+    }
+
+    vector<vector<int>> generate(int numRows) {
+        vector<int> prev = {1}, level;
+        vector<vector<int>> ans;
+        ans.push_back({1});
+
+        for(int i = 0; i < numRows-1; i++){
+            pascal(level,i,ans,numRows-1,prev);
+        }
+
+        return ans;
+    }
+};
