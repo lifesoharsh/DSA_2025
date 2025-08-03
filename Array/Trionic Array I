@@ -1,0 +1,23 @@
+class Solution {
+public:
+    bool isTrionic(vector<int>& nums) {
+        bool mono = false, bi = false, tri = false;
+
+        for(int i = 0; i < nums.size()-1; i++){
+            if(nums[i] == nums[i+1]) return false;
+            if(nums[i] < nums[i+1] && !mono){
+                mono = true;
+            }
+            else if(nums[i] > nums[i+1]){
+                if(!mono) return false;
+                bi = true;
+            } 
+            else if(nums[i] < nums[i+1] && mono && bi){
+                tri = true;
+            } 
+            if(nums[i] > nums[i+1] && mono && bi && tri) return false;
+        }
+
+        return (mono && bi && tri);
+    }
+};
