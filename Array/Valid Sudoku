@@ -1,0 +1,38 @@
+class Solution {
+public:
+    bool isValidSudoku(vector<vector<char>>& board) {
+        unordered_set<char> seen;
+
+        for(int i = 0; i < 9; i++){
+            for(int j = 0; j < 9; j++){
+                if(board[i][j] == '.') continue;
+                if(seen.count(board[i][j])) return false;
+                seen.insert(board[i][j]);
+            }
+            seen.clear();
+        }
+        for(int i = 0; i < 9; i++){
+            for(int j = 0; j < 9; j++){
+                if(board[j][i] == '.') continue;
+                if(seen.count(board[j][i])) return false;
+                seen.insert(board[j][i]);
+            }
+            seen.clear();
+        }
+
+        vector<unordered_set<char>> sets(9);
+
+        for(int i = 0; i < 9; i++){
+            for(int j = 0; j < 9; j++){
+                if(board[i][j] == '.') continue;
+
+                int idx = (i/3)*3 + j / 3;
+
+                if(sets[idx].count(board[i][j])) return false;
+                sets[idx].insert(board[i][j]);
+            }
+        }
+
+        return true;
+    }
+};
