@@ -1,13 +1,14 @@
+//sample lambda function
+auto cmp = [](pair<int, vector<int>> a, pair<int, vector<int>> b){
+    return a.first < b.first;
+};   
+
+//easier version: using max heap
 class Solution {
 public:
     vector<vector<int>> kClosest(vector<vector<int>>& points, int k) {
         vector<vector<int>> ans;
-
-        auto cmp = [](pair<int, vector<int>> a, pair<int, vector<int>> b){
-            return a.first < b.first;
-        };
-
-        priority_queue<pair<int, vector<int>>, vector<pair<int, vector<int>>>, decltype(cmp)> cp(cmp);
+        priority_queue<vector<int>, vector<vector<int>>> cp;
         int distance;
 
         for(auto& idx: points){
@@ -15,13 +16,13 @@ public:
             int y = idx[1];
             distance = x*x + y*y;
             
-            cp.push({distance, {x, y}});
+            cp.push({distance, x, y});
             if(cp.size() > k) cp.pop();
         }
 
         while(!cp.empty()){
-            auto [_, coordinates] = cp.top();
-            ans.push_back(coordinates);
+            auto& arr = cp.top();
+            ans.push_back({arr[1], arr[2]});
             cp.pop();
         }
 
