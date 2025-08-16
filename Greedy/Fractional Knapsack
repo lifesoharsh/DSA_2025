@@ -1,0 +1,34 @@
+class Solution {
+  public:
+    static bool compare(pair<int,int>& a, pair<int,int>& b){
+        double a1 = (a.first*1.0)/a.second;
+        double b1 = (b.first*1.0)/b.second;
+        return a1 > b1;
+    }
+    
+    
+    double fractionalKnapsack(vector<int>& val, vector<int>& wt, int capacity) {
+        vector<pair<int,int>> pbw;
+        
+        for(int i = 0; i < wt.size(); i++){
+            pbw.push_back({val[i], wt[i]});
+        }
+        
+        sort(pbw.begin(), pbw.end(), compare);
+        double profit = 0.0;
+        
+        for(int i = 0; i < pbw.size(); i++){
+            if(pbw[i].second <= capacity){
+                profit += pbw[i].first;
+                capacity -= pbw[i].second;
+            }
+            else{
+                profit += ((capacity*1.0)/pbw[i].second)*pbw[i].first;
+                break;
+            }
+        }
+        
+        return profit;
+        
+    }
+};
