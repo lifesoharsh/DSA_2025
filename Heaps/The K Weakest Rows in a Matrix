@@ -1,0 +1,35 @@
+class Solution {
+public:
+    vector<int> kWeakestRows(vector<vector<int>>& mat, int k) {
+        auto cmp = [](auto& a, auto& b){
+            if(a.first < b.first) return true;
+            else if (a.first == b.first){
+                return a.second < b.second;
+            }
+            return false;
+        };
+
+        priority_queue<pair<int, int>, vector<pair<int,int>>, decltype(cmp)> pq;
+        int ctr = 0;
+
+        for(int i = 0; i < mat.size(); i++){
+            ctr = count(mat[i].begin(), mat[i].end(), 1);
+
+            pq.push({ctr,i});
+            if(pq.size() > k) pq.pop();
+            ctr = 0;
+        }
+
+        vector<int> indexes;
+
+        while(!pq.empty()){
+            auto idx = pq.top().second;
+            pq.pop();
+
+            indexes.push_back(idx);
+        }
+
+        reverse(indexes.begin(), indexes.end());
+        return indexes;
+    }
+};
