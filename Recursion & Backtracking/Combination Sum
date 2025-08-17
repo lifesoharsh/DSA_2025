@@ -1,0 +1,32 @@
+class Solution {
+public:
+    set<vector<int>> seen;
+
+    void getCS(vector<int>& candidates, vector<int>& combo, vector<vector<int>>& ans, int idx, int target){
+        if(target == 0){
+            if(!seen.count(combo)){
+                ans.push_back(combo);
+                seen.insert(combo);
+            }
+            return;
+        }
+        if(idx == candidates.size() || target < 0){
+            return;
+        }
+
+        combo.push_back(candidates[idx]);
+        getCS(candidates, combo, ans, idx+1, target-candidates[idx]);
+        getCS(candidates, combo, ans, idx, target-candidates[idx]);
+        combo.pop_back();
+        getCS(candidates, combo, ans, idx+1, target);
+    }
+
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        vector<int> combo;
+        vector<vector<int>> ans;
+
+        getCS(candidates, combo, ans, 0, target);
+        
+        return ans;
+    }
+};
