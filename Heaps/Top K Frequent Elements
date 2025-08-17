@@ -1,17 +1,5 @@
 class Solution {
 public:
-    struct insert{
-        unordered_map<int, int>* freqPtr;
-
-        insert(unordered_map<int, int>* f){
-            freqPtr = f;
-        }
-        
-        bool operator()(int a , int b){
-            return (*freqPtr)[a] > (*freqPtr)[b];
-        }
-    };
-    
     vector<int> topKFrequent(vector<int>& nums, int k) {
         if(k == nums.size()) return nums;
 
@@ -20,9 +8,13 @@ public:
 
         for(int i:nums) freq[i]++;
 
-        priority_queue<int, vector<int>, insert> pq{insert(&freq)};
+        auto cmp = [&freq](auto& a, auto& b){
+            return freq[a] > freq[b];
+        };
 
-        for(auto [n, _]: freq){
+        priority_queue<int, vector<int>, decltype(cmp)> pq(cmp);
+
+        for(auto& [n,_]: freq){
             pq.push(n);
             if(pq.size() > k) pq.pop();
         }
@@ -33,6 +25,5 @@ public:
         }
 
         return ans;
-
     }
 };
