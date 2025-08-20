@@ -14,7 +14,8 @@ It serves as my learning journal and preparation for coding interviews and compe
 - **Language:** C++  
 - **IDE:** VS Code   
 - **Problem Sources:**  
-  - [LeetCode](https://leetcode.com)  
+  - [LeetCode](https://leetcode.com)
+  - [GFG]_(https://www.geeksforgeeks.org)
   - [Striver's A2Z DSA Sheet](https://takeuforward.org)  
 
 ---
