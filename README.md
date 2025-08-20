@@ -15,8 +15,7 @@ It serves as my learning journal and preparation for coding interviews and compe
 - **IDE:** VS Code   
 - **Problem Sources:**  
   - [LeetCode](https://leetcode.com)
-  - [GFG]_(https://www.geeksforgeeks.org)
-  - [Striver's A2Z DSA Sheet](https://takeuforward.org)  
+  - [GFG](https://geeksforgeeks.org)  
 
 ---
 
