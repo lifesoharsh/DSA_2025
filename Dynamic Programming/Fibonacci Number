@@ -1,0 +1,16 @@
+class Solution {
+public:
+    int fibonacci(int n, vector<int>& f){
+        if(n <= 1) return n;
+
+        if(f[n] != -1) return f[n];
+
+        f[n] = fibonacci(n-2, f) + fibonacci(n-1, f);
+
+        return f[n];
+    }
+    int fib(int n) {
+        vector<int> F(n+1, -1);
+        return fibonacci(n, F);
+    }
+};
