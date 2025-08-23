@@ -1,0 +1,21 @@
+class Solution {
+public:
+    unordered_map<string, bool> memo;
+
+    bool wordBreak(string s, vector<string>& wordDict) {
+        if(memo.count(s)) return memo[s];
+        if(s == "") return true;
+
+        for(auto& word: wordDict){
+            if(s.find(word) == 0){
+                string suffix = s.substr(word.length());
+                if(wordBreak(suffix, wordDict)){
+                    memo[s] = true;
+                    return true;
+                }
+            }
+        }
+        memo[s] = false;
+        return false;
+    }
+};
