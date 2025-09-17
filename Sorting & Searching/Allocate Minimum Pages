@@ -1,0 +1,44 @@
+class Solution {
+  public:
+  
+    bool isValid(vector<int>& arr, int m, int maxPages){
+        int stu = 1, pages = 0;
+        int n = arr.size();
+        
+        for(int i = 0; i < n; i++){
+            if(arr[i] > maxPages) return false;
+            
+            if(pages + arr[i] <= maxPages){
+                pages += arr[i];
+            }
+            else{
+                pages = arr[i];
+                stu++;
+            }
+        }
+        
+        return (stu <= m);
+    }
+    
+    int findPages(vector<int> &arr, int k) {
+        if(k > arr.size()) return -1;
+        
+        int st = 0;
+        int end = accumulate(arr.begin(), arr.end(), 0);
+        int ans = -1;
+        
+        while(st <= end){
+            int mid = st + (end-st)/2;
+            
+            if(isValid(arr, k, mid)){
+                ans = mid;
+                end = mid-1;
+            }
+            else{
+                st = mid+1;
+            }
+        }
+        
+        return ans;
+    }
+};
